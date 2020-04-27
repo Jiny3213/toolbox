@@ -1,0 +1,29 @@
+{
+  "name": "toolbox",
+  "version": "1.0.0",
+  "description": "Jinyuu's toolbox",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jiny3213/toolbox.git"
+  },
+  "keywords": [
+    "javascript",
+    "nodejs"
+  ],
+  "author": "Jinyuu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jiny3213/toolbox/issues"
+  },
+  "homepage": "https://github.com/Jiny3213/toolbox#readme",
+  "dependencies": {
+    "jest": "^25.4.0"
+  }
+}
