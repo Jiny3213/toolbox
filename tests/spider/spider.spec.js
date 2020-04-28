@@ -1,5 +1,5 @@
-const {getSingleArticle, getBase64Image} = require("../../node/spider/weixin-article/article")
-const {getArticleList} = require('../../node/spider/weixin-article/articleList')
+const {getSingleArticle, getBase64Image} = require("../../spider/weixin-article/article")
+const {getArticleList} = require('../../spider/weixin-article/articleList')
 
 describe('test weixin article spider', () => {
 
