@@ -18,12 +18,16 @@ function getUniqueStr(arr) {
 // 筛选汉字(大概)的正则表达式
 const reg = /[\u4e00-\u9fa5]/g
 
+/**
+ * 获取文件中不重复的汉字
+ * @param filePath 文件路径
+ * @returns {string}
+ */
 module.exports = function (filePath) {
     // 获取文件中所有的文字
     let strOrigin = fs.readFileSync(filePath, 'utf8')
     // 筛选汉字
     let strArray = strOrigin.match(reg)
     // 去重
-    let str = getUniqueStr(strArray).join('')
-    return str
+    return getUniqueStr(strArray).join('')
 }

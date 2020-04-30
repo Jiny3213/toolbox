@@ -1,0 +1,6 @@
+@font-face {
+    font-family: Trends;
+    /*正常引入字体*/
+    src: url("./trends.ttf") format('truetype');
+}
+
