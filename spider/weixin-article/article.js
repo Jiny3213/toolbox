@@ -5,7 +5,11 @@
  */
 const request = require('request-promise');
 
-// 把图片src转换为base64的src
+/**
+ * 把图片src转换为base64的src
+ * @param url 图片链接
+ * @returns {Promise<string> | PromiseLike<string>}
+ */
 function getBase64Image(url) {
   return request({
     url,
@@ -18,8 +22,13 @@ function getBase64Image(url) {
     return 'data:image/jpg;base64,' + body.toString('base64');
   });
 }
+
+/**
+ * 把单个微信文章转换为静态html
+ * @param url 微信文章链接
+ * @returns {Promise<string> | PromiseLike<string>}
+ */
 function getSingleArticle(url) {
-// 把单个微信文章转换为静态html
     return request({
       url,
     }).then(async body => {

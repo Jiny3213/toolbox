@@ -42,7 +42,29 @@ function getArticleList(key, biz, uin) {
     // }
   });
 }
-
+function getArticleListByWeb() {
+  return request({
+    url: 'https://mp.weixin.qq.com/cgi-bin/newmasssendpage',
+    headers: {
+      Cookie: 'slave_user=gh_a29345370b7e; ' +
+        'slave_sid=dm1Ed3QwZERMa00xQUxWNTdnZzZ0SUpCWDRCYWQ0dUN2aktoZmpNMm5pVEFYS29KU1hFSnlsamxQNV9nR1lyM3V5S3JwcHdQNDE5N3BaUzNCVmcxWHdIcXZ1Zk9teUpDcmt4S1Yzbmd6MjBRNXdDamdQSEs0NzJlTG1YYXFWV3oyc1lOYXBKWG50OUdvZVR0; bizuin=3248457808; ' +
+        'slave_bizuin=3248457808; ' +
+        'rand_info=CAESIDedRi6nnOEnrrBisKudMDkuIK7PuodpQgBjnEkjVgr0',
+    },
+    qs: {
+      count: 7,
+      begin: 0,
+      // csrf 必须
+      token: 901824440,
+      lang: 'zh_CN',
+      f: 'json',
+      ajax: 1
+    }
+  }).then(body => {
+    console.log(JSON.parse(body).sent_list[0])
+  })
+}
+getArticleListByWeb()
 module.exports = {
   getArticleList
 }

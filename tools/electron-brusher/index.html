@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>小鹅通刷人气工具</title>
+  <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+</head>
+<body>
+<div class="form-item">
+  <label for="url">小鹅通课程url: </label>
+  <input type="text" id="url">
+</div>
+<div class="form-item">
+  <label for="time">刷多少次(1-100): </label>
+  <input id="time" type="number">
+</div>
+<div class="form-item">
+  <span>cookie(ko_token): </span>
+  <input type="text" id="cookie">
+</div>
+<div class="form-item">
+  <span>随机等待最长时间(至少等待0.5s)单位秒: </span>
+  <input type="number" id="sleep" min="0.5">
+</div>
+<div class="form-item">
+  <button onclick="handleStart()">开始刷</button>
+  <button onclick="handleStop()">停止刷</button>
+</div>
+<script>
+  const { ipcRenderer } = require('electron')
+  // 提示信息
+  console.log('欢迎使用小鹅通刷流量工具!!')
+  function handleStart() {
+    let url = document.getElementById('url').value
+    let time = parseInt(document.getElementById('time').value)
+    let cookie = document.getElementById('cookie').value
+    let sleep = document.getElementById('sleep').value
+
+    if(!url) {
+      console.error('请输入url')
+      return
+    } else if (!time || time < 1 || time > 100) {
+      console.error('请正确输入刷的次数')
+      return
+    } else if(!cookie) {
+      console.error('请输入cookie!')
+      return
+    } else if(!sleep) {
+      console.error('请输入最大等待时间!')
+      return
+    }
+    ipcRenderer.send('brush', {
+      url, time, cookie, sleep
+    })
+  }
+  function handleStop() {
+    ipcRenderer.send('stop', '')
+  }
+  ipcRenderer.on('msg', (event, args) => {
+    console.log('后台: ', args)
+  })
+  ipcRenderer.on('warn', (event, args) => {
+    console.warn('后台: ', args)
+  })
+  ipcRenderer.on('error', (event, args) => {
+    console.error('后台: ', args)
+  })
+
+  // 开发模式
+  window.onload = () => {
+    // document.getElementById('url').value = 'https://appb0chwvkb4794.h5.xiaoeknow.com/content_page/eyJ0eXBlIjoxMiwicmVzb3VyY2VfdHlwZSI6NCwicmVzb3VyY2VfaWQiOiJsXzVlZjMyNTFmMjEwNTVfOXBGR0ZyMXAiLCJwcm9kdWN0X2lkIjoiIiwiYXBwX2lkIjoiYXBwYjBjSHd2S0I0Nzk0IiwiZXh0cmFfZGF0YSI6MH0'
+    // document.getElementById('time').value = 5
+    // document.getElementById('cookie').value = 'c9e4b0f157692ed50d1c18a0c8f2502a'
+    document.getElementById('sleep').value = 1
+  }
+</script>
+<style>
+  label, input {
+    display: block;
+  }
+  button {
+    padding: 5px;
+  }
+  .form-item {
+    margin: 10px;
+  }
+  .hint p {
+    color: red;
+  }
+  .hint img {
+    border: 1px solid #000000;
+  }
+</style>
+<script src="spider.js"></script>
+</body>
+</html>

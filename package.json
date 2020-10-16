@@ -24,6 +24,8 @@
   },
   "homepage": "https://github.com/Jiny3213/toolbox#readme",
   "dependencies": {
+    "axios": "^0.20.0",
+    "cheerio": "^1.0.0-rc.3",
     "font-spider": "^1.3.5",
     "jest": "^25.4.0",
     "request": "^2.88.2",
